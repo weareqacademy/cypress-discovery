@@ -16,7 +16,16 @@ class SignupPage {
         cy.get('input[name="whatsapp"]').type(deliver.whatsapp)
 
         cy.get('input[name="postalcode"]').type(deliver.address.postalcode)
-        cy.get('input[type=button][value="Buscar CEP"]').click()
+
+        cy.fixture('mocked-cep').then((mockedCep) => {
+            cy.intercept('GET', 'https://viacep.com.br/ws/**', {
+                body: mockedCep
+            }).as('mockCep')
+    
+            cy.get('input[type=button][value="Buscar CEP"]').click()
+    
+            cy.wait('@mockCep')
+        })
 
         cy.get('input[name="address-number"]').type(deliver.address.number)
         cy.get('input[name="address-details"]').type(deliver.address.details)
@@ -35,7 +44,7 @@ class SignupPage {
 
     modalContentShouldBe(expectedMessage) {
         cy.get('.swal2-container .swal2-html-container')
-        .should('have.text', expectedMessage)
+            .should('have.text', expectedMessage)
     }
 
     alertMessageShouldBe(expectedMessage) {

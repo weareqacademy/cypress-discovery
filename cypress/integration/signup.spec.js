@@ -4,12 +4,12 @@ import signupFactory from '../factories/SignupFactory'
 describe('Signup', () => {
 
     // beforeEach(function () {
-    //     cy.fixture('deliver').then((d) => {
-    //         this.deliver = d
+    //     cy.fixture('mocked-cep').then((m) => {
+    //         this.mockedCep = m
     //     })
     // })
 
-    it('User should be deliver', function () {
+    it.only('User should be deliver', function () {
 
         var deliver = signupFactory.deliver()
 

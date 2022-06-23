@@ -25,8 +25,8 @@ corepack enable
 Execute os comandos abaixo para instalar das dependências do projeto e execução dos testes:
 
 ```sh
-cd vdt-season1-marvel-api
-npm i
+cd cypress-discovery
+yarn install
 npx cypress run
 ```
 
